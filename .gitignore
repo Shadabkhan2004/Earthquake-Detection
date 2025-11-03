@@ -1,4 +1,5 @@
 data/
 preprocessed/
 models/
-sample_wavs/
+earthquake_wavs/
+noise_wavs/

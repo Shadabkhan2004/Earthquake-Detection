@@ -78,6 +78,10 @@ except Exception as e:
 
 
 
+@app.get("/")
+def home():
+    return {"message": "Earthquake Prediction API is running"}
+
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
@@ -99,15 +103,22 @@ async def predict(file: UploadFile = File(...)):
 
   event_prob = float(event_pred[0][0])
   event_detected = bool(event_prob > EVENT_THRESHOLD)
-  p_val = float(p_pred[0][0])
-  s_val = float(s_pred[0][0])
 
-  return {
+  response = {
     "event_probability": round(event_prob, 4),
     "event_detected": event_detected,
-    "p_prediction": round(p_val, 4),
-    "s_prediction": round(s_val, 4)
   }
+
+  # Only include P/S predictions if event is detected
+  if event_detected:
+    p_val = float(p_pred[0][0]) * 60
+    s_val = float(s_pred[0][0]) * 60
+    response.update({
+      "p_prediction": round(p_val, 4),
+      "s_prediction": round(s_val, 4),
+    })
+
+  return response
 
 
 
