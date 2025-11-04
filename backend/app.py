@@ -12,7 +12,7 @@ import os
 
 FS = 100
 EXPECTED_WIDTH = 95
-EVENT_THRESHOLD = 0.5
+EVENT_THRESHOLD = 0.6
 MODEL_DIR = "../models/cnn_lstm_multi_model"
 
 
