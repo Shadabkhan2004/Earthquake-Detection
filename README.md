@@ -92,8 +92,7 @@ Before developing the multi-output CNN–LSTM, a simpler **CNN classifier** was 
 ## Future Work
 
 - Experiment with CNN + Transformer hybrid architectures  
-- Improve arrival-time precision  
-- Deploy as a hosted interactive web app  
+- Improve arrival-time precision    
 
 ---
 
