@@ -54,10 +54,25 @@ Below is a snapshot of the `/predict` page — the model detected an **earthquak
 - **Backend:** FastAPI endpoint `/predict` loads the trained model (`cnn_lstm_multi_model`) and performs real-time inference.  
 - **Frontend:** React UI with file upload and result visualization.  
   - Displays event probability  
-  - Hides P/S arrival predictions when no event is detected  
+  - Only outputs P/S arrival predictions if the event probability exceeds threshold (default 0.6)  
 
 ---
 
+## Making a New Model Where the Loss is Only Considered for Earthquake Labels
+#### Model Performance (Test Set)
+
+| Metric      | Value   |
+|------------|--------:|
+| Precision  | 0.9988 |
+| Recall     | 0.9907 |
+| F1 Score   | 0.9947 |
+| AUC        | 0.9998 |
+| P-wave MAE | 0.0329 |
+| P-wave RMSE| 0.0410 |
+| S-wave MAE | 0.3548 |
+| S-wave RMSE| 0.4787 |
+
+---
 ## Previous Model (Baseline CNN)
 
 Before developing the multi-output CNN–LSTM, a simpler **CNN classifier** was trained to distinguish between **earthquake_local** and **noise** samples using spectrograms.

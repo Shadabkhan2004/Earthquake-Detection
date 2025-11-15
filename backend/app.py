@@ -12,14 +12,19 @@ import os
 
 FS = 100
 EXPECTED_WIDTH = 95
-EVENT_THRESHOLD = 0.6
-MODEL_DIR = "../models/cnn_lstm_multi_model"
+EVENT_THRESHOLD = 0.5
+MODEL_DIR = "../models/cnn_lstm_multi_model_fixedmask"
 
 
 
 def masked_mse(y_true, y_pred):
-  mask = tf.cast(y_true > 1e-3, tf.float32)
-  return tf.reduce_sum(mask * tf.square(y_true - y_pred)) / (tf.reduce_sum(mask) + 1e-8)
+  event = y_true[:, 0]        
+  arrival = y_true[:, 1]      
+
+  mask = tf.cast(event > 0, tf.float32)  
+  sq_err = tf.square(arrival - y_pred[:, 0]) * mask
+
+  return tf.reduce_sum(sq_err) / (tf.reduce_sum(mask) + 1e-6)
 
 
 
